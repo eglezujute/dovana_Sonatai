@@ -1,1 +1,0 @@
-# dovana_Sonatai
