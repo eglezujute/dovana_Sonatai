@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dovanos testas 🌷</title>
+
+<style>
+:root{
+--bg:#ffc37c;
+--card:rgba(255, 159, 78, 0.95);
+--text:#3c3e43;
+--yes:#22c55e;
+--no:#ef4444;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui;
+background:var(--bg);
+color:var(--text);
+height:100vh;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* progress */
+.progress{
+position:fixed;
+top:0;left:0;right:0;
+height:4px;
+background:#1f2937;
+}
+.bar{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#22c55e,#3b82f6);
+transition:.3s;
+}
+
+/* scenes */
+.scene{
+display:none;
+width:100%;
+justify-content:center;
+align-items:center;
+}
+
+.scene.active{
+display:flex;
+}
+
+/* card */
+.card{
+width:min(760px,92vw);
+max-height:90vh;          /* 👈 SVARBU */
+overflow-y:auto;          /* 👈 SCROLL VIDUJE */
+background:var(--card);
+padding:32px;
+border-radius:24px;
+box-shadow:0 40px 120px rgba(0,0,0,.6);
+text-align:center;
+}
+
+.card img{
+max-width:100%;     /* niekada neišeina už kortelės */
+height:auto;
+border-radius:14px;
+margin-top:12px;
+}
+
+/* buttons */
+.controls{
+display:flex;
+gap:12px;
+margin-top:18px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.btn{
+border:0;
+padding:14px 18px;
+border-radius:14px;
+font-weight:700;
+cursor:pointer;
+min-width:120px;
+text-decoration:none;
+}
+
+.yes{background:var(--yes);color:#3c3e43}
+.no{background:var(--no);color:#3c3e43}
+
+/* intro */
+.intro-text{
+font-size:20px;
+line-height:1.6;
+text-align:justify;
+max-height:60vh;
+overflow-y:auto;
+padding-right:10px;
+}
+
+/* input */
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:12px;
+border:1px solid #333;
+background:#f3e6d3;
+}
+
+/* overlay */
+.overlay{
+position:fixed;
+inset:0;
+display:none;
+place-items:center;
+background:rgba(0,0,0,.75);
+z-index:9999;
+}
+
+.modal{
+background:#ffc37c;
+padding:26px;
+border-radius:20px;
+width:min(700px,92vw);
+text-align:center;
+}
+
+/* loader */
+.loader{
+margin:20px auto;
+width:50px;
+height:50px;
+border:4px solid #2a2f3a;
+border-top:4px solid #22c55e;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* runaway NO */
+.no-run{
+position:fixed;
+left:55%;
+top:65%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<!-- 0 INTRO -->
+<div class="scene active">
+<div class="card">
+<h1>Miela Dalyte,</h1>
+
+<div class="intro-text">
+gimtadienio proga noriu Jums padėkoti už tai, ką sunku išmatuoti nuveiktų darbų sąrašais. Per ilgus bendro darbo metus mūsų ryšys tapo kur kas daugiau nei kolegiškas – jame telpa pasitikėjimas, pagarba, palaikymas, nuoširdūs pokalbiai, bendri rūpesčiai ir džiaugsmai.<br><br>
+Ačiū Jums už išmintį, gebėjimą matyti plačiau, už patikimą petį ir už tai, kad šalia Jūsų daugelis darbų tampa lengvesni, o iššūkiai – įveikiami. Esu dėkinga likimui už galimybę eiti profesinį kelią kartu.<br><br>
+Linkiu, kad gyvenimas Jums dosniai dovanotų sveikatą, artimųjų meilę, vidinę harmoniją, įkvepiančias patirtis ir kuo daugiau laiko tam, kas iš tiesų teikia džiaugsmą. Tegul net ir kasdienybės skubėjime nepritrūksta progų sustoti, pasimėgauti akimirka ir pasijusti laiminga.<br><br>
+O šiai progai noriu Jus pakviesti atlikti testą, kuris parinks labiausiai Jums tinkamą dovaną pagal Jūsų asmenybės tipą 🌷
+</div>
+
+<div class="controls">
+<button class="btn yes" onclick="next()">Atlikti testą</button>
+</div>
+</div>
+</div>
+
+<!-- 1 -->
+<div class="scene">
+<div class="card">
+<h1>Kaip dažniausiai leidžiate laisvalaikį? 🧘‍♀️</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Aktyviai – renginiai, kelionės, naujos vietos</button>
+<button class="btn yes" onclick="next()">Ramiai – knyga, filmai, namų aplinka</button>
+<button class="btn yes" onclick="next()">Mišriai – priklauso nuo nuotaikos</button>
+</div>
+</div>
+</div>
+
+<!-- 2 -->
+<div class="scene">
+<div class="card">
+<h1>Kas Jums svarbiausia patirtyse? 💼</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Nauji įspūdžiai</button>
+<button class="btn yes" onclick="next()">Ramybė, kokybė, estetika</button>
+<button class="btn yes" onclick="next()">Netikėtumas</button>
+</div>
+</div>
+</div>
+
+<!-- 3 -->
+<div class="scene">
+<div class="card">
+<h1>Kaip priimate sprendimus? 🤔</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Greitai, kliaujuosi intuicija</button>
+<button class="btn yes" onclick="next()">Analizuoju, ilgai mąstau logiškai</button>
+</div>
+</div>
+</div>
+
+<!-- 4 -->
+<div class="scene">
+<div class="card">
+<h1>Kaip reaguojate į staigmenas? 🤩</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Labai patinka</button>
+<button class="btn yes" onclick="next()">Patinka, jei gerai apgalvotos</button>
+<button class="btn yes" onclick="next()">Staigmenos ne man</button>
+</div>
+</div>
+</div>
+
+<!-- 5 -->
+<div class="scene">
+<div class="card">
+<h1>Ar mėgstate išbandyti naujus skonius? 🍜</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Taip, VISADA</button>
+<button class="btn yes" onclick="next()">Tik jei saugu ir aišku, kas yra ragaujama</button>
+<button class="btn yes" onclick="next()">Ne</button>
+</div>
+</div>
+</div>
+
+<!-- 6 -->
+<div class="scene">
+<div class="card">
+<h1>Ar jums svarbi maisto patirtis (ne tik skonis, bet ir pateikimas)? 🌹</h1>
+<div class="controls">
+<button class="btn yes" onclick="next()">Labai</button>
+<button class="btn yes" onclick="next()">Ne visada</button>
+<button class="btn yes" onclick="next()">Gali būti pateikiama bet kaip</button>
+</div>
+</div>
+</div>
+
+<!-- 7 DATE -->
+<div class="scene">
+<div class="card">
+<h1>Pasirinkite artimiausią Jums tinkamą datą ir laiką dovanai panaudoti 📅 </h1>
+<p>Spauskite ant kalendoriaus ir laikrodžio ikonų, kad atsirastų pasirinkimo lentelės</p>
+<input type="date">
+<input type="time">
+
+<div class="controls">
+<button class="btn yes" onclick="showLoading()">Tęsti</button>
+</div>
+</div>
+</div>
+
+<!-- LOADING -->
+<div class="overlay" id="loading">
+<div class="modal">
+<h1>🔍 Ieškoma geriausia dovana...</h1>
+<p>Pagal Jūsų asmenybės tipą atrenkami variantai.</p>
+  
+<div class="loader"></div>
+</div>
+</div>
+
+<!-- FINAL -->
+<div class="scene">
+<div class="card">
+<h1>
+Pagal Jūsų asmenybės tipą geriausia dovana yra...<br>
+Egzotinė vakarienė Vilniuje dviems 🐜
+</h1>
+<div class="intro-text">
+Tai neeilinė gastronominė patirtis, atvykstanti tik vieną kartą į Lietuvą. Rytų virtuvės restoranas kviečia į drąsų, netikėtą ir nepamirštamą potyrį – pažinti ateities gastronomiją per egzotinius skonius.<br>
+Šios dovanos metu laukia autentiška degustacija, kurioje subtiliai ir profesionaliai paruošti patiekalai atskleidžia netradicinę, tačiau vis labiau pasaulyje vertinamą maisto kryptį. Svečiai turės galimybę paragauti dar gyvų bambukų bei šilkaverpių lervų, kruopščiai paruoštų miltines kandies lervų, svirplių bei kitų egzotinių ingredientų, kurie rytų virtuvėje interpretuojami kaip inovatyvūs, maistingi ir gurmaniški skoniai.  
+</div>
+<img src="https://cdn.corenexis.com/f/iGD8kv71e4G.jpg">
+<h2>Ar išrinkta dovana atitinka Jūsų poreikius? 🎁</h2>
+<div class="controls">
+<button class="btn yes" onclick="openFinal()">TAIP</button>
+<button class="btn no" id="noBtn">Kartoti testą</button>
+</div>
+</div>
+</div>
+
+<!-- RESULT -->
+<div class="overlay" id="result">
+<div class="modal">
+<h1>Taip ir galvojome, kad ši dovana Jums patiks!</h1>
+<p>Dovaną įteikia:</p>
+<h2>
+Su nuoširdžiausiais linkėjimais ir dėkingumu už mūsų bendrą kelią – Neringa 🌷
+</h2>
+<a class="btn yes"
+href="tickets-6a342e9b334140.49859372.pdf"
+target="_blank">Atsisiųsti bilietus</a>
+<button class="btn no" onclick="restart()">Eiti į sveikinimą</button>
+</div>
+</div>
+
+<script>
+
+let step = 0;
+const scenes = document.querySelectorAll(".scene");
+const bar = document.getElementById("bar");
+const loading = document.getElementById("loading");
+
+function update(){
+scenes.forEach((s,i)=>{
+s.classList.toggle("active", i === step);
+});
+
+bar.style.width = (step/(scenes.length-1))*100 + "%";
+}
+
+function next(){
+if(step < scenes.length - 1){
+step++;
+update();
+}
+}
+
+function showLoading(){
+loading.style.display = "grid";
+
+setTimeout(()=>{
+loading.style.display = "none";
+step = scenes.length - 1;
+update();
+}, 3000);
+}
+
+/* FINAL NO BUTTON */
+const noBtn = document.getElementById("noBtn");
+
+function moveNo(){
+noBtn.style.position = "fixed";
+noBtn.style.left = Math.random()*(window.innerWidth-120)+"px";
+noBtn.style.top = Math.random()*(window.innerHeight-60)+"px";
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", moveNo);
+noBtn.addEventListener("touchstart",(e)=>{
+e.preventDefault();
+moveNo();
+});
+
+function openFinal(){
+document.getElementById("result").style.display="grid";
+}
+
+function restart(){
+step = 0;
+update();
+document.getElementById("result").style.display="none";
+noBtn.style.position="relative";
+noBtn.style.left="";
+noBtn.style.top="";
+}
+
+update();
+
+</script>
+
+</body>
+</html>
